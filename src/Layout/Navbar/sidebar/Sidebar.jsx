@@ -28,10 +28,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-
-import Theme from "../../../Theme/Theme";
+import LightAndDarkMode from './LightAndDarkMode';
 
 
 
@@ -287,9 +284,7 @@ export default function Sidebar({ Children }) {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={HandleThemeChange}> 
-              <Badge  >
-                <LightAndDarkMode mode={mode} />
-              </Badge>
+                <LightAndDarkMode />
             </IconButton>
             <IconButton
               size="large"
@@ -378,11 +373,3 @@ export default function Sidebar({ Children }) {
 
 
 
-export function LightAndDarkMode({mode}) {
-
-  return (
-    <div>
-      {mode ? <LightModeIcon /> :<DarkModeIcon />}
-    </div>
-  )
-}

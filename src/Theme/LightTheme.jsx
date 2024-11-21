@@ -1,3 +1,4 @@
+
 const LightTheme = [
     {
         name: 'light',
@@ -46,6 +47,11 @@ const LightTheme = [
 
 
         },
+        component:{
+            typography:{
+                
+            }
+        }
     }
 ]
 
