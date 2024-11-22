@@ -352,6 +352,14 @@ export default function Sidebar({ Children }) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
+            <ListItemButton onClick={() => navigate('/stopwatch')}>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Stopwatch" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
             <ListItemButton onClick={() => navigate('/demo')}>
               <ListItemIcon>
                 <InboxIcon />

@@ -6,6 +6,7 @@ import FullLayout from "../Layout/Navbar/FullLayout";
 /* Pages */
 const Dashboard = Loadable(lazy(() => import("../pages/Dashboard/Dashboard")));
 const Demo = Loadable(lazy(() => import("../pages/Dashboard/demo")));
+const Stopwatch = Loadable(lazy(() => import("../pages/Dashboard/Stopwatch")));
 
 /* Layout */
 const Sidebar = Loadable(lazy(() => import("../Layout/Navbar/sidebar/Sidebar")));
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
         children: [
             { path: "/dashboard", element: <Dashboard /> },
             { path: "/demo", element: <Demo /> },
+            { path: "/stopwatch", element: <Stopwatch /> },
         ],
     }
 ],
