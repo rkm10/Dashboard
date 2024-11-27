@@ -1,96 +1,63 @@
-import React, { useState } from "react";
+import * as React from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
+import { useTheme } from '@mui/material/styles';
 
-function StopWatch() {
-	const [isActive, setIsActive] = useState(false);
-	const [isPaused, setIsPaused] = useState(true);
-	const [time, setTime] = useState(0);
+const columns = [
+	{ field: 'id', headerName: 'Lead ID', width: 350 },
+	{ field: 'name', headerName: 'Name', width: 350 },
+	{ field: 'company', headerName: 'Company', width: 350 },
+	{ field: 'nos', headerName: 'Number of Seats', type: 'number', width: 250 },
+	{
+		field: 'RealtorAssigned',
+		headerName: 'Realtor Assigned',
+		description: 'This column has a value getter and is not sortable.',
+		sortable: false,
+		width: 350,
+		// valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
+	},
+];
 
-	React.useEffect(() => {
-		let interval = null;
+const rows = [
+	{ id: 1, name: 'Snow', company: 'Jon',RealtorAssigned: 'Albus Dumbledore ', nos: 35 },
+	{ id: 2, name: 'Lannister', company: 'Cersei',RealtorAssigned: 'Albus Dumbledore ', nos: 42 },
+	{ id: 3, name: 'Lannister', company: 'Jaime',RealtorAssigned: 'Albus Dumbledore ', nos: 45 },
+	{ id: 4, name: 'Stark', company: 'Arya',RealtorAssigned: 'Albus Dumbledore ', nos: 16 },
+	{ id: 5, name: 'Targaryen', company: 'Daenerys',RealtorAssigned: 'Albus Dumbledore ', nos: null },
+	{ id: 6, name: 'Melisandre', company: null,RealtorAssigned: 'Albus Dumbledore ', nos: 150 },
+	{ id: 7, name: 'Clifford', company: 'Ferrara',RealtorAssigned: 'Albus Dumbledore ', nos: 44 },
+	{ id: 8, name: 'Frances', company: 'Rossini',RealtorAssigned: 'Albus Dumbledore ', nos: 36 },
+	{ id: 9,RealtorAssigned: 'Albus Dumbledore ', nos: '99', company: 'Harvey', lastName: 'raj' },
+];
 
-		if (isActive && isPaused === false) {
-			interval = setInterval(() => {
-				setTime((time) => time + 10);
-			}, 10);
-		} else {
-			clearInterval(interval);
-		}
-		return () => {
-			clearInterval(interval);
-		};
-	}, [isActive, isPaused]);
+const paginationModel = { page: 0, pageSize: 5 };
 
-	const handleStart = () => {
-		setIsActive(true);
-		setIsPaused(false);
-	};
+export default function DataTable() {
 
-	const handlePauseResume = () => {
-		setIsPaused(!isPaused);
-	};
-
-	const handleReset = () => {
-		setIsActive(false);
-		setTime(0);
-	};
-
+	const theme = useTheme();
 	return (
-		<div className="stop-watch">
-			<Timer time={time} />
-			<ControlButtons
-				active={isActive}
-				isPaused={isPaused}
-				handleStart={handleStart}
-				handlePauseResume={handlePauseResume}
-				handleReset={handleReset}
+		<Paper sx={{ height: 400, width: '90%', placeSelf: 'center' }}>
+			<DataGrid
+				rows={rows}
+				columns={columns}
+				initialState={{ pagination: { paginationModel } }}
+				pageSizeOptions={[5, 10, 15]}
+				checkboxSelection={false}
+				isRowSelectable={() => false}
+				disableSelectionOnClick
+
+				sx={{
+					border: 0,
+					'& .MuiDataGrid-cell:focus': {
+						outline: 'none', // Removes focus outline on cell
+					},
+					'& .MuiDataGrid-columnHeader:focus': {
+						outline: 'none',
+					},
+					color: theme.palette.text.primary,
+					backgroundColor: theme.palette.background.default,
+				}}
 			/>
-		</div>
+		</Paper>
 	);
-}
-
-export default StopWatch;
-
-
-
-export function Timer(props) {
-	return (
-		<div className="timer">
-			<span className="digits">
-				{("0" + Math.floor((props.time / 60000) % 60)).slice(-2)}:
-			</span>
-			<span className="digits">
-				{("0" + Math.floor((props.time / 1000) % 60)).slice(-2)}.
-			</span>
-			<span className="digits mili-sec">
-				{("0" + ((props.time / 10) % 100)).slice(-2)}
-			</span>
-		</div>
-	);
-}
-
-export function ControlButtons(props) {
-  const StartButton = (
-      <div className="btn btn-one btn-start"
-          onClick={props.handleStart}>
-          Start
-      </div>
-  );
-  const ActiveButtons = (
-      <div className="btn-grp">
-          <div className="btn btn-two"
-              onClick={props.handleReset}>
-              Reset
-          </div>
-          <div className="btn btn-one"
-              onClick={props.handlePauseResume}>
-              {props.isPaused ? "Resume" : "Pause"}
-          </div>
-      </div>
-  );
-
-  return (
-      <div className="Control-Buttons">
-          <div>{props.active ? ActiveButtons : StartButton}</div>
-      </div>
-  );
 }

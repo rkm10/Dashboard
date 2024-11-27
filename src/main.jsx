@@ -7,7 +7,6 @@ import { Suspense } from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
 import Spinner from './Layout/spinner/spinner.jsx'
 import persistStore from 'redux-persist/es/persistStore'
-import { BrowserRouter } from 'react-router-dom'
 
 
 let persistor = persistStore(store);

@@ -17,7 +17,7 @@ const LightTheme = [
             secondary: {
                 main: "#9c27b0",
                 light: "#ba68c8",
-                dark: "#7b1fa2",
+                dark: "#fff",
                 contrastText: "#fff",
             },
             error: {
@@ -43,6 +43,9 @@ const LightTheme = [
                 light: "#4caf50",
                 dark: "#1b5e20",
                 contrastText: "#fff",
+            },
+            text:{
+                primary: "#000000",
             }
 
 
